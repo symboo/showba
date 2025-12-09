@@ -1,7 +1,7 @@
-cd C:\Users\User\Downloads\showba
+cd /c/Users/User/Downloads/showba
 git init
+git status
 git add .
-git commit -m "Initial commit: add website files"
-git remote add origin https://github.com/<your-username>/showba.git
-git branch -M main
-git push -u origin main
+git commit -m "Initial commit"
+git push -u origin master
+https://symboo.github.io/showba/
