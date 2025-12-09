@@ -1,7 +1,6 @@
 cd /c/Users/User/Downloads/showba
 git init
-git status
 git add .
 git commit -m "Initial commit"
-git push -u origin master
+git push
 https://symboo.github.io/showba/

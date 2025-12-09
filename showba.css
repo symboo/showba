@@ -831,3 +831,518 @@ body {
         top: -20px;
     }
 }
+/* 在 showba.css 文件末尾添加以下響應式修正 */
+
+/* ==================== 響應式修正 ==================== */
+
+/* 平板 (768px - 1024px) */
+@media (max-width: 1024px) {
+    .lottery-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 30px;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .wheel-visual {
+        width: 350px;
+        height: 350px;
+        margin: 0 auto 40px;
+    }
+    
+    #wheelCanvas {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .prize-item {
+        padding: 18px;
+        gap: 18px;
+    }
+    
+    .prize-rank {
+        min-width: 85px;
+        padding: 10px 15px;
+    }
+    
+    .prize-details h4 {
+        font-size: 1.15rem;
+    }
+}
+
+/* 小平板 (600px - 768px) */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+        justify-content: flex-start;
+        min-height: 100vh;
+        overflow-y: auto;
+    }
+    
+    .header {
+        margin-bottom: 30px;
+        padding: 15px;
+    }
+    
+    .logo-circle {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 20px;
+    }
+    
+    .brand-text h1 {
+        font-size: 2.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .slogan {
+        font-size: 1.2rem;
+        padding: 12px 30px;
+        margin-top: 10px;
+    }
+    
+    .lottery-container {
+        padding: 25px 20px;
+        gap: 25px;
+        margin-top: 0;
+    }
+    
+    .wheel-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 18px;
+    }
+    
+    .wheel-header h3 {
+        font-size: 1.4rem;
+    }
+    
+    .spin-counter {
+        font-size: 1rem;
+        padding: 8px 20px;
+    }
+    
+    .wheel-visual {
+        width: 320px;
+        height: 320px;
+        margin: 0 auto 35px;
+    }
+    
+    .spin-btn {
+        padding: 18px 30px;
+        font-size: 1.2rem;
+        min-width: 200px;
+    }
+    
+    .wheel-result h4 {
+        font-size: 1.3rem;
+    }
+    
+    .result-display {
+        padding: 25px 20px;
+        min-height: 160px;
+    }
+    
+    .result-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .prizes-card {
+        padding: 25px 20px;
+    }
+    
+    .prizes-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 25px;
+    }
+    
+    .prize-list {
+        gap: 12px;
+    }
+    
+    .prize-item {
+        padding: 16px;
+        gap: 15px;
+    }
+    
+    .prize-rank {
+        min-width: 75px;
+        font-size: 1.1rem;
+        padding: 8px 12px;
+    }
+    
+    .prize-details h4 {
+        font-size: 1.1rem;
+    }
+    
+    .prize-details p {
+        font-size: 0.95rem;
+    }
+    
+    /* 修正裝飾泡泡位置 */
+    .bubble-1 {
+        width: 250px;
+        height: 250px;
+        right: -100px;
+    }
+    
+    .bubble-2 {
+        width: 200px;
+        height: 200px;
+        left: -80px;
+        bottom: 10%;
+    }
+    
+    .bubble-3 {
+        width: 180px;
+        height: 180px;
+        top: 70%;
+        right: -50px;
+    }
+}
+
+/* 手機 (480px - 600px) */
+@media (max-width: 600px) {
+    .wheel-visual {
+        width: 280px;
+        height: 280px;
+        margin: 0 auto 30px;
+    }
+    
+    .spin-btn {
+        padding: 16px 25px;
+        font-size: 1.1rem;
+        min-width: 180px;
+    }
+    
+    .brand-text h1 {
+        font-size: 2.3rem;
+    }
+    
+    .slogan {
+        font-size: 1.1rem;
+        padding: 10px 25px;
+    }
+    
+    .prize-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+        padding: 20px;
+    }
+    
+    .prize-rank {
+        min-width: 70px;
+        padding: 8px 10px;
+    }
+    
+    .prize-details h4 {
+        font-size: 1rem;
+    }
+    
+    .prize-details p {
+        font-size: 0.9rem;
+    }
+    
+    .result-display h3 {
+        font-size: 1.4rem;
+    }
+    
+    .prize-name {
+        font-size: 1.1rem;
+        padding: 8px 15px;
+    }
+    
+    .prize-value {
+        font-size: 1.2rem;
+    }
+}
+
+/* 小手機 (480px 以下) */
+@media (max-width: 480px) {
+    body {
+        padding: 12px;
+    }
+    
+    .header {
+        margin-bottom: 25px;
+        padding: 10px;
+    }
+    
+    .logo-circle {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 15px;
+    }
+    
+    .brand-text h1 {
+        font-size: 2rem;
+        margin-bottom: 8px;
+    }
+    
+    .slogan {
+        font-size: 1rem;
+        padding: 10px 20px;
+        line-height: 1.4;
+    }
+    
+    .lottery-container {
+        padding: 20px 15px;
+        gap: 20px;
+        border-radius: 15px;
+    }
+    
+    .wheel-header {
+        padding: 15px;
+        border-radius: 12px;
+    }
+    
+    .wheel-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .wheel-visual {
+        width: 260px;
+        height: 260px;
+        border-width: 10px;
+        margin: 0 auto 25px;
+    }
+    
+    #wheelCanvas {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .spin-btn {
+        padding: 14px 20px;
+        font-size: 1rem;
+        min-width: 160px;
+        border-radius: 40px;
+    }
+    
+    .wheel-result h4 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .result-display {
+        padding: 20px 15px;
+        min-height: 140px;
+        border-radius: 15px;
+    }
+    
+    .result-icon {
+        font-size: 2.2rem;
+        margin-bottom: 12px;
+    }
+    
+    .result-display h3 {
+        font-size: 1.3rem;
+    }
+    
+    .prizes-card {
+        padding: 20px 15px;
+        border-radius: 15px;
+    }
+    
+    .prizes-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+    
+    .prize-list {
+        gap: 10px;
+    }
+    
+    .prize-item {
+        padding: 15px;
+        gap: 10px;
+        border-radius: 12px;
+    }
+    
+    .prize-rank {
+        min-width: 65px;
+        font-size: 1rem;
+        padding: 7px 10px;
+        border-radius: 8px;
+    }
+    
+    .prize-details h4 {
+        font-size: 0.95rem;
+        line-height: 1.3;
+    }
+    
+    .prize-details p {
+        font-size: 0.85rem;
+    }
+    
+    /* 修正指針在小螢幕上的顯示 */
+    .wheel-pointer {
+        top: -25px;
+        width: 25px;
+        height: 25px;
+    }
+    
+    .wheel-pointer::before {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .wheel-pointer::after {
+        width: 12px;
+        height: 12px;
+        bottom: -5px;
+    }
+    
+    .pointer-glow {
+        width: 50px;
+        height: 50px;
+        top: -15px;
+    }
+    
+    /* 進一步縮小裝飾泡泡 */
+    .bubble-1 {
+        width: 180px;
+        height: 180px;
+        right: -70px;
+        top: 10%;
+    }
+    
+    .bubble-2 {
+        width: 150px;
+        height: 150px;
+        left: -60px;
+        bottom: 15%;
+    }
+    
+    .bubble-3 {
+        width: 120px;
+        height: 120px;
+        top: 75%;
+        right: -40px;
+    }
+}
+
+/* 超小手機 (360px 以下) */
+@media (max-width: 360px) {
+    .wheel-visual {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .brand-text h1 {
+        font-size: 1.8rem;
+    }
+    
+    .slogan {
+        font-size: 0.95rem;
+        padding: 8px 15px;
+    }
+    
+    .spin-btn {
+        padding: 12px 18px;
+        font-size: 0.95rem;
+        min-width: 140px;
+    }
+    
+    .prize-item {
+        padding: 12px;
+    }
+    
+    .prize-rank {
+        min-width: 60px;
+        font-size: 0.9rem;
+        padding: 6px 8px;
+    }
+    
+    .prize-details h4 {
+        font-size: 0.9rem;
+    }
+}
+
+/* 橫向模式 (手機橫放) */
+@media (max-height: 600px) and (orientation: landscape) {
+    body {
+        padding: 10px;
+        justify-content: flex-start;
+        overflow-y: auto;
+    }
+    
+    .header {
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+    
+    .logo-circle {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 10px;
+    }
+    
+    .brand-text h1 {
+        font-size: 2rem;
+        margin-bottom: 5px;
+    }
+    
+    .slogan {
+        font-size: 1rem;
+        padding: 8px 15px;
+        margin-top: 5px;
+    }
+    
+    .lottery-container {
+        padding: 15px;
+        gap: 15px;
+        margin-top: 0;
+    }
+    
+    .wheel-visual {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto 15px;
+    }
+    
+    .wheel-header {
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+    
+    .prize-list {
+        max-height: 300px;
+        overflow-y: auto;
+        padding-right: 5px;
+    }
+}
+
+/* 修正轉盤在各種尺寸下的顯示 */
+@media (max-width: 1200px) {
+    .wheel-visual {
+        margin: 0 auto 40px;
+    }
+}
+
+/* 確保轉盤 canvas 在各種尺寸下保持比例 */
+canvas#wheelCanvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+/* 修正抽獎按鈕在觸摸設備上的點擊體驗 */
+@media (hover: none) and (pointer: coarse) {
+    .spin-btn {
+        min-height: 60px;
+        padding: 16px 25px;
+    }
+    
+    .spin-btn:active {
+        transform: scale(0.98);
+    }
+    
+    .prize-item {
+        padding: 20px;
+    }
+}
