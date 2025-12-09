@@ -3,10 +3,8 @@
     --xiaobei-red: #e60012;       /* 頭獎紅色 */
     --xiaobei-yellow: #FFD700;    /* 二獎黃色 */
     --xiaobei-white: #FFFFFF;     /* 其他獎項白色 */
-    --xiaobei-blue: #1b1e87;      /* 網站字體藍色 */
-    --xiaobei-light-blue: #2a2da5; /* 淺藍色 */
-    --xiaobei-gray: #f8f9fa;      /* 淺灰色背景 */
-    --xiaobei-dark-blue: #14166b; /* 深藍色 */
+    --xiaobei-blue: #020672;      /* 網站字體藍色 */
+    --xiaobei-light-blue: #2a2c77; /* 淺藍色 */
     --xiaobei-dark-gray: #333333; /* 深灰色文字 */
     --shadow-light: 0 4px 12px rgba(27, 30, 135, 0.1);
     --shadow-medium: 0 8px 24px rgba(27, 30, 135, 0.15);
@@ -23,7 +21,7 @@
 
 body {
     font-family: 'Noto Sans TC', sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #e3e7f0 100%);
+    background: rgb(231, 231, 0) ;
     color: var(--xiaobei-blue);
     min-height: 100vh;
     display: flex;
@@ -46,19 +44,17 @@ body {
 .logo-circle {
     width: 140px;
     height: 140px;
-    background: linear-gradient(135deg, var(--xiaobei-red) 0%, #ff3333 100%);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden; /* 讓圖片裁成圓形 */
     margin: 0 auto 25px;
-    box-shadow: var(--shadow-medium);
     border: 5px solid var(--xiaobei-white);
+    box-shadow: var(--shadow-medium);
 }
 
-.logo-circle i {
-    font-size: 4rem;
-    color: var(--xiaobei-white);
+.logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 自動裁切，保持比例好看 */
 }
 
 .brand-text h1 {
