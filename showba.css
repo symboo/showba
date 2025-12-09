@@ -1,0 +1,837 @@
+/* 小北百貨大掃除風格 - 專注轉盤抽獎 */
+:root {
+    --xiaobei-red: #e60012;       /* 頭獎紅色 */
+    --xiaobei-yellow: #FFD700;    /* 二獎黃色 */
+    --xiaobei-white: #FFFFFF;     /* 其他獎項白色 */
+    --xiaobei-blue: #1b1e87;      /* 網站字體藍色 */
+    --xiaobei-light-blue: #2a2da5; /* 淺藍色 */
+    --xiaobei-gray: #f8f9fa;      /* 淺灰色背景 */
+    --xiaobei-dark-blue: #14166b; /* 深藍色 */
+    --xiaobei-dark-gray: #333333; /* 深灰色文字 */
+    --shadow-light: 0 4px 12px rgba(27, 30, 135, 0.1);
+    --shadow-medium: 0 8px 24px rgba(27, 30, 135, 0.15);
+    --shadow-strong: 0 12px 36px rgba(27, 30, 135, 0.2);
+    --border-radius: 20px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e3e7f0 100%);
+    color: var(--xiaobei-blue);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* 頁頭樣式 */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.logo-circle {
+    width: 140px;
+    height: 140px;
+    background: linear-gradient(135deg, var(--xiaobei-red) 0%, #ff3333 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    box-shadow: var(--shadow-medium);
+    border: 5px solid var(--xiaobei-white);
+}
+
+.logo-circle i {
+    font-size: 4rem;
+    color: var(--xiaobei-white);
+}
+
+.brand-text h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.5rem;
+    color: var(--xiaobei-blue);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.slogan {
+    font-size: 1.4rem;
+    color: var(--xiaobei-blue);
+    font-weight: 600;
+    background: rgba(255, 215, 0, 0.1);
+    padding: 15px 40px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-top: 15px;
+    box-shadow: var(--shadow-light);
+    border: 2px solid rgba(27, 30, 135, 0.1);
+}
+
+/* 抽獎區 */
+.lottery-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.lottery-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    background: var(--xiaobei-white);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    box-shadow: var(--shadow-medium);
+    border: 1px solid rgba(27, 30, 135, 0.1);
+}
+
+/* 轉盤卡片 */
+.wheel-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding-bottom: 20px; /* 增加底部內距給箭頭空間 */
+}
+
+.wheel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(27, 30, 135, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid rgba(27, 30, 135, 0.1);
+}
+
+.wheel-header h3 {
+    color: var(--xiaobei-blue);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.spin-counter {
+    background: var(--xiaobei-white);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    border: 2px solid var(--xiaobei-light-blue);
+    box-shadow: var(--shadow-light);
+}
+
+.spin-counter .count {
+    font-weight: 700;
+    color: var(--xiaobei-blue);
+    font-size: 1.5rem;
+}
+
+.wheel-visual {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto 50px; /* 增加下方間距給箭頭 */
+    background: var(--xiaobei-white);
+    border-radius: 50%;
+    border: 10px solid rgba(27, 30, 135, 0.1);
+    box-shadow: var(--shadow-medium);
+}
+
+#wheelCanvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.wheel-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* 移除舊的指針樣式（現在由 JavaScript 繪製） */
+.wheel-pointer {
+    display: none;
+}
+
+.spin-btn {
+    background: linear-gradient(135deg, var(--xiaobei-blue) 0%, var(--xiaobei-light-blue) 100%);
+    color: var(--xiaobei-white);
+    border: none;
+    padding: 20px 45px;
+    font-size: 1.3rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 700;
+    box-shadow: var(--shadow-medium);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0 auto;
+    min-width: 220px;
+    justify-content: center;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.spin-btn:hover:not(:disabled) {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: var(--shadow-strong);
+}
+
+.spin-btn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* 抽獎結果 */
+.wheel-result {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.wheel-result h4 {
+    color: var(--xiaobei-blue);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 1.4rem;
+}
+
+.result-display {
+    background: rgba(27, 30, 135, 0.05);
+    border-radius: 20px;
+    padding: 35px 30px;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px dashed var(--xiaobei-light-blue);
+    transition: var(--transition);
+}
+
+.result-icon {
+    font-size: 3rem;
+    color: var(--xiaobei-blue);
+    margin-bottom: 20px;
+}
+
+.result-display h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--xiaobei-blue);
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.result-display p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--xiaobei-blue);
+}
+
+/* 獎品資訊區 */
+.prizes-info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.prizes-card {
+    background: rgba(27, 30, 135, 0.03);
+    border-radius: var(--border-radius);
+    padding: 35px 30px;
+    border: 2px solid rgba(27, 30, 135, 0.1);
+    box-shadow: var(--shadow-light);
+}
+
+.prizes-card h3 {
+    color: var(--xiaobei-blue);
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.6rem;
+    padding-bottom: 15px;
+    border-bottom: 3px solid rgba(27, 30, 135, 0.1);
+}
+
+.prize-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.prize-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 15px;
+    transition: var(--transition);
+    background: var(--xiaobei-white);
+    box-shadow: var(--shadow-light);
+    border-left: 5px solid;
+    gap: 20px;
+}
+
+.prize-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+
+.prize-rank {
+    font-weight: 800;
+    font-size: 1.2rem;
+    padding: 10px 15px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 90px;
+    flex-shrink: 0;
+    color: var(--xiaobei-white);
+}
+
+.prize-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.prize-details h4 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: var(--xiaobei-blue);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.prize-details p {
+    font-size: 1rem;
+    color: var(--xiaobei-blue);
+    font-weight: 600;
+}
+
+/* 獎品顏色 - 大掃除風格 */
+.grand {
+    border-left-color: var(--xiaobei-red);
+    background: linear-gradient(135deg, rgba(230, 0, 18, 0.05) 0%, rgba(255, 255, 255, 1) 50%);
+}
+.grand .prize-rank { 
+    background: var(--xiaobei-red);
+}
+
+.second {
+    border-left-color: var(--xiaobei-yellow);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 255, 255, 1) 50%);
+}
+.second .prize-rank { 
+    background: var(--xiaobei-yellow);
+    color: var(--xiaobei-blue);
+}
+
+.third {
+    border-left-color: var(--xiaobei-blue);
+    background: linear-gradient(135deg, rgba(27, 30, 135, 0.05) 0%, rgba(255, 255, 255, 1) 50%);
+}
+.third .prize-rank { 
+    background: var(--xiaobei-blue);
+    color: var(--xiaobei-white);
+}
+
+.fourth {
+    border-left-color: var(--xiaobei-blue);
+    background: linear-gradient(135deg, rgba(27, 30, 135, 0.05) 0%, rgba(255, 255, 255, 1) 50%);
+}
+.fourth .prize-rank { 
+    background: var(--xiaobei-blue);
+    color: var(--xiaobei-white);
+}
+
+.fifth {
+    border-left-color: var(--xiaobei-blue);
+    background: linear-gradient(135deg, rgba(27, 30, 135, 0.05) 0%, rgba(255, 255, 255, 1) 50%);
+}
+.fifth .prize-rank { 
+    background: var(--xiaobei-blue);
+    color: var(--xiaobei-white);
+}
+
+.consolation {
+    border-left-color: var(--xiaobei-blue);
+    background: linear-gradient(135deg, rgba(27, 30, 135, 0.05) 0%, rgba(255, 255, 255, 1) 50%);
+}
+.consolation .prize-rank { 
+    background: var(--xiaobei-blue);
+    color: var(--xiaobei-white);
+}
+
+/* 裝飾泡泡 */
+.decoration-bubble {
+    position: fixed;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.05;
+    filter: blur(20px);
+}
+
+.bubble-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--xiaobei-red);
+    top: 5%;
+    right: -150px;
+}
+
+.bubble-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--xiaobei-yellow);
+    bottom: 15%;
+    left: -100px;
+}
+
+.bubble-3 {
+    width: 250px;
+    height: 250px;
+    background: var(--xiaobei-blue);
+    top: 60%;
+    right: 10%;
+}
+
+/* 通知樣式 */
+.notification {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    padding: 15px 25px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1001;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 彩紙特效 */
+.confetti {
+    position: fixed;
+    width: 15px;
+    height: 15px;
+    pointer-events: none;
+    z-index: 1000;
+    animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* 響應式設計 */
+@media (max-width: 1200px) {
+    .lottery-container {
+        grid-template-columns: 1fr;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .wheel-visual {
+        width: 380px;
+        height: 380px;
+        margin: 0 auto 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        margin-bottom: 30px;
+    }
+    
+    .logo-circle {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .logo-circle i {
+        font-size: 3.5rem;
+    }
+    
+    .brand-text h1 {
+        font-size: 2.8rem;
+    }
+    
+    .slogan {
+        font-size: 1.2rem;
+        padding: 12px 25px;
+    }
+    
+    .wheel-visual {
+        width: 320px;
+        height: 320px;
+        margin: 0 auto 40px;
+    }
+    
+    .wheel-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .prize-item {
+        padding: 18px;
+        gap: 15px;
+    }
+    
+    .prize-rank {
+        min-width: 80px;
+        font-size: 1.1rem;
+        padding: 8px 12px;
+    }
+    
+    .prize-details h4 {
+        font-size: 1.1rem;
+    }
+    
+    .prize-details p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+    
+    .lottery-container {
+        padding: 25px 20px;
+    }
+    
+    .wheel-visual {
+        width: 280px;
+        height: 280px;
+        margin: 0 auto 35px;
+    }
+    
+    .spin-btn {
+        padding: 16px 25px;
+        font-size: 1.1rem;
+        min-width: 200px;
+    }
+    
+    .brand-text h1 {
+        font-size: 2.2rem;
+    }
+    
+    .slogan {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+    }
+    
+    .prize-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .prize-rank {
+        min-width: 70px;
+    }
+    
+    .prize-details h4 {
+        font-size: 1rem;
+    }
+}
+
+/* ==================== 新增指針樣式 ==================== */
+.wheel-pointer {
+    position: absolute;
+    top: -40px; /* 將指針移到轉盤上方 */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wheel-pointer::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, var(--xiaobei-red) 0%, #ff3333 100%);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(230, 0, 18, 0.4);
+    z-index: 2;
+}
+
+.wheel-pointer::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: var(--xiaobei-white);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    border-radius: 2px;
+    z-index: 1;
+}
+
+.pointer-glow {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(230, 0, 18, 0.3) 0%, rgba(230, 0, 18, 0) 70%);
+    z-index: 1;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+    50% { opacity: 0.8; transform: translateX(-50%) scale(1.1); }
+}
+
+/* 高亮指針區 */
+.pointer-highlight {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 80%);
+    z-index: 15;
+}
+
+/* 獎品扇形區域指示器 */
+.slice-indicator {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.slice-indicator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.8) 20%, 
+        rgba(255, 255, 255, 1) 50%, 
+        rgba(255, 255, 255, 0.8) 80%, 
+        transparent 100%);
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    z-index: 5;
+}
+
+/* 轉盤容器調整 */
+.wheel-visual {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto 50px;
+    background: var(--xiaobei-white);
+    border-radius: 50%;
+    border: 15px solid rgba(27, 30, 135, 0.1);
+    box-shadow: 
+        0 0 0 5px rgba(255, 255, 255, 0.5),
+        var(--shadow-medium),
+        inset 0 0 20px rgba(27, 30, 135, 0.1);
+    overflow: hidden;
+}
+
+/* 轉盤陰影效果增強 */
+.wheel-visual::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 0 30px rgba(0, 0, 0, 0.1),
+        inset 0 0 60px rgba(0, 0, 0, 0.05);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* 結果顯示增強 */
+.result-display {
+    background: linear-gradient(135deg, 
+        rgba(27, 30, 135, 0.05) 0%, 
+        rgba(255, 255, 255, 0.8) 100%);
+    border-radius: 20px;
+    padding: 35px 30px;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--xiaobei-light-blue);
+    box-shadow: 
+        inset 0 0 20px rgba(27, 30, 135, 0.1),
+        var(--shadow-light);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.result-display::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 70%
+    );
+    animation: shine 3s infinite linear;
+    z-index: 0;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.result-display.winning {
+    border-color: var(--xiaobei-red);
+    box-shadow: 
+        0 0 30px rgba(230, 0, 18, 0.3),
+        var(--shadow-medium);
+    animation: winningPulse 2s infinite;
+}
+
+@keyframes winningPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+.result-text {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.prize-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--xiaobei-blue);
+    margin: 10px 0;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    border: 2px solid rgba(27, 30, 135, 0.1);
+}
+
+.prize-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--xiaobei-red);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 旋轉中效果 */
+.wheel-visual.spinning {
+    animation: wheelGlow 0.5s infinite alternate;
+}
+
+@keyframes wheelGlow {
+    from { box-shadow: 0 0 20px rgba(27, 30, 135, 0.3), var(--shadow-medium); }
+    to { box-shadow: 0 0 40px rgba(27, 30, 135, 0.5), var(--shadow-strong); }
+}
+
+/* 增加響應式設計 */
+@media (max-width: 768px) {
+    .wheel-pointer {
+        top: -30px;
+        width: 30px;
+        height: 30px;
+    }
+    
+    .wheel-pointer::before {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .wheel-pointer::after {
+        width: 15px;
+        height: 15px;
+        bottom: -6px;
+    }
+    
+    .pointer-glow {
+        width: 60px;
+        height: 60px;
+        top: -20px;
+    }
+}

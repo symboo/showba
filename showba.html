@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小北百貨 - 大掃除轉盤抽獎</title>
+    <link rel="stylesheet" href="showba.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧹</text></svg>">
+</head>
+<body>
+    <!-- 頁頭 -->
+    <header class="header">
+        <div class="logo-circle">
+            <i class="fas fa-broom"></i>
+        </div>
+        <div class="brand-text">
+            <h1>小北百貨</h1>
+            <p class="slogan">大掃除轉盤抽獎，試試你的好手氣！</p>
+        </div>
+    </header>
+
+    <!-- 抽獎轉盤區 -->
+    <section class="lottery-section">
+        <div class="lottery-container">
+            <div class="wheel-wrapper">
+                <div class="wheel-card">
+                    <div class="wheel-header">
+                        <h3><i class="fas fa-dice"></i> 立即抽獎</h3>
+                        <div class="spin-counter">
+                            <span>今日剩餘次數：</span>
+                            <span id="remainingSpins" class="count">5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="wheel-visual">
+                        <canvas id="wheelCanvas" width="400" height="400"></canvas>
+                        <div class="wheel-center">
+                            <div class="wheel-pointer"></div>
+                            <button id="spinButton" class="spin-btn">
+                                <i class="fas fa-redo"></i>
+                                <span>開始抽獎</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="wheel-result">
+                        <h4><i class="fas fa-star"></i> 抽獎結果</h4>
+                        <div id="result" class="result-display">
+                            <div class="result-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <p>等待抽獎...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+<!-- 修改後的 HTML 獎品清單部分 -->
+<div class="prizes-info">
+    <div class="prizes-card">
+        <h3><i class="fas fa-award"></i> 獎品清單</h3>
+        <div class="prize-list">
+            <div class="prize-item grand">
+                <div class="prize-rank">頭獎</div>
+                <div class="prize-details">
+                    <h4>Felsted 110V 毛巾消毒櫃 (50 L)</h4>
+                    <p>價值 NT$5,690</p>
+                </div>
+            </div>
+            <div class="prize-item second">
+                <div class="prize-rank">二獎</div>
+                <div class="prize-details">
+                    <h4>THOMSON 雙電池旗艦濕拖無線吸塵器 TM-SAV52D</h4>
+                    <p>價值 NT$5,612</p>
+                </div>
+            </div>
+            <div class="prize-item third">
+                <div class="prize-rank">三獎</div>
+                <div class="prize-details">
+                    <h4>Panasonic 除濕機 F‑Y12EM</h4>
+                    <p>價值 NT$5,130</p>
+                </div>
+            </div>
+            <div class="prize-item fourth">
+                <div class="prize-rank">四獎</div>
+                <div class="prize-details">
+                    <h4>Felsted 桌上型空氣清淨器 (小空間)</h4>
+                    <p>價值 NT$4,680</p>
+                </div>
+            </div>
+            <div class="prize-item consolation">
+                <div class="prize-rank">安慰獎</div>
+                <div class="prize-details">
+                    <h4>隨身空氣淨化器 (入門款)</h4>
+                    <p>價值 NT$1,089</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </section>
+
+    <!-- 裝飾元素 -->
+    <div class="decoration-bubble bubble-1"></div>
+    <div class="decoration-bubble bubble-2"></div>
+    <div class="decoration-bubble bubble-3"></div>
+    
+    <script src="showba.js"></script>
+</body>
+</html>
