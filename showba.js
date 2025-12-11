@@ -11,51 +11,52 @@ const INITIAL_SPIN_COUNT = 1;
 // 現在調整為：頭獎(1), 二獎(2), 三獎(3), 四獎(4), 安慰獎
 const prizes = [
     { 
-        name: "Felsted 110V 毛巾消毒櫃 (50 L)", 
-        value: "NT$5,690", 
+        name: "好神拖 免手洗旋轉拖把組（含雙拖布）",
+        value: "NT$1,099", 
         color: "#e60012",  // 紅色
         rank: "頭獎",
         index: 0,
-        weight: 1,  // 權重最小，範圍最小
-        probability: 4.76  // 大約 4.76%
+        weight: 1,  
+        probability: 4.76  
     },
     { 
-        name: "THOMSON 雙電池旗艦濕拖無線吸塵器 TM-SAV52D", 
-        value: "NT$5,612", 
+        name: "3M 除塵紙拖把 + 補充包超值組",
+        value: "NT$899", 
         color: "#FFD700",  // 金色
         rank: "二獎",
         index: 1,
         weight: 2,
-        probability: 9.52  // 大約 9.52%
+        probability: 9.52  
     },
     { 
-        name: "Panasonic 除濕機 F‑Y12EM", 
-        value: "NT$5,130", 
+        name: "伸縮多功能掃天花板除塵刷（清潔神器）",
+        value: "NT$699", 
         color: "#66BB6A",  // 綠色
         rank: "三獎",
         index: 2,
         weight: 5,
-        probability: 23.81  // 大約 23.81%
+        probability: 23.81  
     },
     { 
-        name: "Felsted 桌上型空氣清淨器 (小空間)", 
-        value: "NT$4,680", 
+        name: "妙管家 超強清潔組（廚房+浴室去汙大禮包）",
+        value: "NT$599", 
         color: "#42A5F5",  // 藍色
         rank: "四獎",
         index: 3,
         weight: 4,
-        probability: 19.05  // 大約 19.05%
+        probability: 19.05  
     },
     { 
-        name: "隨身空氣淨化器 (入門款)", 
-        value: "NT$1,089", 
+        name: "浴室瓷磚去垢海綿組（4入）",
+        value: "NT$129", 
         color: "#AB47BC",  // 紫色
         rank: "安慰獎",
         index: 4,
-        weight: 6,  // 權重最大，範圍最大
-        probability: 28.57  // 大約 28.57%
+        weight: 6,
+        probability: 28.57  
     }
 ];
+
 
 // 根據權重隨機選擇獎項（權重越大，中獎機率越高）
 function getRandomPrizeIndex() {
